@@ -7,7 +7,7 @@ export interface Restaurant {
     name: string;
     description: string;
     category: RestaurantCategory;
-    rating: number;
+    rating?: number;
     deliveryTime: string;
     image: string;
     menu: MenuData;
