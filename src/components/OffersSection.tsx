@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 // import { Card, CardContent } from "@/components/ui/card";
-import { Flame, Percent, Gift } from "lucide-react";
+// import { Flame, Percent, Gift } from "lucide-react";
 import Offer from "./Offer";
 import { useCallback, useEffect, useState } from "react";
 

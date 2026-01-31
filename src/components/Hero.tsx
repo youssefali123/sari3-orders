@@ -1,23 +1,23 @@
-import { Truck, Clock, MapPin } from "lucide-react";
-import Marquee from "react-fast-marquee";
+// import { Truck, Clock, MapPin } from "lucide-react";
+// import Marquee from "react-fast-marquee";
 const Hero = () => {
-  const features = [
-    {
-      icon: <Truck className="w-6 h-6 text-primary-foreground" />,
-      title: "توصيل سريع",
-      description: "نوصّلك في أسرع وقت",
-    },
-    {
-      icon: <Clock className="w-6 h-6 text-primary-foreground" />,
-      title: "طلب سهل",
-      description: "اختار واطلب في ثواني",
-    },
-    {
-      icon: <MapPin className="w-6 h-6 text-primary-foreground" />,
-      title: "لحد الباب",
-      description: "نوصّل لأي مكان",
-    },
-  ];
+  // const features = [
+  //   {
+  //     icon: <Truck className="w-6 h-6 text-primary-foreground" />,
+  //     title: "توصيل سريع",
+  //     description: "نوصّلك في أسرع وقت",
+  //   },
+  //   {
+  //     icon: <Clock className="w-6 h-6 text-primary-foreground" />,
+  //     title: "طلب سهل",
+  //     description: "اختار واطلب في ثواني",
+  //   },
+  //   {
+  //     icon: <MapPin className="w-6 h-6 text-primary-foreground" />,
+  //     title: "لحد الباب",
+  //     description: "نوصّل لأي مكان",
+  //   },
+  // ];
 
   const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => (
     <div className="bg-card rounded-2xl p-4 shadow-card hover:shadow-elevated transition-shadow duration-300 mx-3 sm:mx-0 w-[280px] sm:w-auto h-full">

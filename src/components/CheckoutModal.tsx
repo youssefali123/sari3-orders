@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import { X, User, Phone, MapPin, Send, Loader } from "lucide-react";
+import {  useState } from "react";
+import { X, User, Phone, MapPin, Send, Loader, NotebookIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { CartItem, OrderForm } from "@/types/menu";
 // import { toast } from "sonner";
-import { Toast, toast } from "react-hot-toast";
-import Swal from "sweetalert2";
-import sendMessage from "@/services/send_message";
+import {  toast } from "react-hot-toast";
+// import Swal from "sweetalert2";
+// import sendMessage from "@/services/send_message";
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -27,35 +27,35 @@ const CheckoutModal = ({
     name: "",
     phone: "",
     address: "",
+    notes: "",
   });
   const [loading, setLoading] = useState(false);
-  const send_message = useCallback( async(phone: string, message: string)=>{
-    setLoading(true);
-    await sendMessage(phone, message)
-    Swal.fire({
-      icon: 'success',
-      // title: 'تم إرسال الطلب بنجاح!',
-      title: "طلبك وصل يا جميل هنكلمك حالا😋",
-      showConfirmButton: true,
-      confirmButtonText: " تمام" ,
-      timer: 2500,
+  // const send_message = useCallback( async(phone: string, message: string)=>{
+  //   setLoading(true);
+  //   await sendMessage(phone, message)
+  //   Swal.fire({
+  //     icon: 'success',
+  //     title: "طلبك وصل يا جميل هنكلمك حالا😋",
+  //     showConfirmButton: true,
+  //     confirmButtonText: " تمام" ,
+  //     timer: 2500,
       
-    })
-    onOrderComplete();
-    onClose();
-    setLoading(false);
-  }, [onOrderComplete, onClose])
+  //   })
+  //   onOrderComplete();
+  //   onClose();
+  //   setLoading(false);
+  // }, [onOrderComplete, onClose])
 
-  useEffect(()=>{
-    if(window.localStorage.userInfo){
-      const userInfo = JSON.parse(window.localStorage.userInfo);
-      setForm({
-        name: userInfo.name,
-        phone: userInfo.phone,
-        address: userInfo.address,
-      });
-    }
-  }, [])
+  // useEffect(()=>{
+  //   if(window.localStorage.userInfo){
+  //     const userInfo = JSON.parse(window.localStorage.userInfo);
+  //     setForm({
+  //       name: userInfo.name,
+  //       phone: userInfo.phone,
+  //       address: userInfo.address,
+  //     });
+  //   }
+  // }, [])
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -99,6 +99,7 @@ const CheckoutModal = ({
 
 📋 *تفاصيل الطلب:*
 ${orderDetails}
+${form.notes.trim().length > 2  ? `📝 *ملاحظات:* ${form.notes.trim()}` : ""}
 
 💰 *الإجمالي:* ${totalPrice} جنيه`;
 
@@ -215,6 +216,22 @@ ${orderDetails}
                   maxLength={200}
                 />
               </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground flex items-center gap-2">
+                  <NotebookIcon className="w-4 h-4 text-primary" />
+                  ملاحظات
+                </label>
+                <Input
+                  type="text"
+                  placeholder="اكتب ملاحظاتك"
+                  value={form.notes}
+                  onChange={(e) =>
+                    setForm({ ...form, notes: e.target.value })
+                  }
+                  className="h-12"
+                  maxLength={200}
+                />
+              </div>
 
               <Button
                 type="submit"
@@ -224,8 +241,7 @@ ${orderDetails}
                 disabled={loading}
               >
                 <Send className="w-5 h-5" />
-
-                إرسال الطلب عبر واتساب
+                  ابعت الطلب
                 {/* اطلبني بسرعه يلا🍴 */}
 
                 {loading && <Loader className="w-5 h-5 animate-spin" />}

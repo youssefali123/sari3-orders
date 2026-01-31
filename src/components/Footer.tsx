@@ -1,5 +1,5 @@
-import { Zap, Heart } from "lucide-react";
-import Tooltip from "./ui/toolip";
+// import { Zap, Heart } from "lucide-react";
+// import Tooltip from "./ui/toolip";
 
 const Footer = () => {
   return (
