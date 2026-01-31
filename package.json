@@ -57,6 +57,7 @@
     "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.61.1",
     "react-hot-toast": "^2.6.0",
+    "react-loader-spinner": "^8.0.2",
     "react-redux": "^9.2.0",
     "react-resizable-panels": "^2.1.9",
     "react-router-dom": "^6.30.1",
