@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 // import { Flame, Percent, Gift } from "lucide-react";
 import Offer from "./Offer";
 import { useCallback, useEffect, useState } from "react";
+import Loader from "./Loader";
 
 
 interface Offer {
@@ -69,7 +70,7 @@ const OffersSection = () => {
           <p className="text-muted-foreground">استفد من أفضل العروض المتاحة</p>
         </div>
             <div>
-              {loading ? <p>loading...</p> : <Offer data={offer}/>}
+              {loading ? <Loader /> : <Offer data={offer}/>}
             </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import {  useState, useEffect } from "react";
 import { X, User, Phone, MapPin, Send, Loader, NotebookIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -46,16 +46,16 @@ const CheckoutModal = ({
   //   setLoading(false);
   // }, [onOrderComplete, onClose])
 
-  // useEffect(()=>{
-  //   if(window.localStorage.userInfo){
-  //     const userInfo = JSON.parse(window.localStorage.userInfo);
-  //     setForm({
-  //       name: userInfo.name,
-  //       phone: userInfo.phone,
-  //       address: userInfo.address,
-  //     });
-  //   }
-  // }, [])
+  useEffect(()=>{
+    if(window.localStorage.userInfo){
+      const userInfo = JSON.parse(window.localStorage.userInfo);
+      setForm({
+        name: userInfo.name,
+        phone: userInfo.phone,
+        address: userInfo.address,
+      });
+    }
+  }, [])
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 

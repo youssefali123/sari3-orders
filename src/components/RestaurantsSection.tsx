@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Restaurant, RestaurantCategory, categoryIcons } from "@/types/restaurant";
 import RestaurantCard from "./RestaurantCard";
 import { useAppSelector } from "../hooks/useRedux";
+import Loader from "./Loader";
 
 interface RestaurantsSectionProps {
   onSelectRestaurant: (restaurant: Restaurant) => void;
@@ -18,7 +19,7 @@ const RestaurantsSection = ({ onSelectRestaurant }: RestaurantsSectionProps) => 
     "الكل",
     ...categoriesAPI,
   ]
-  if (loading) return <div className="py-20 text-center">Loading...</div>;
+  if (loading) return <Loader />;
   if (error) return <div className="py-20 text-center text-red-500">{error}</div>;
 
   const filteredRestaurants =

@@ -62,13 +62,13 @@ const RestaurantMenu = ({ restaurant, onBack, onAddItem }: RestaurantMenuProps) 
                   <Badge variant="secondary">
                     {restaurant.category}
                   </Badge>
-                  <div className="flex items-center gap-1 text-primary">
+                  {restaurant.rating && <div className="flex items-center gap-1 text-primary">
                     <Star className="w-4 h-4 fill-primary" />
                     <span className="font-semibold">{restaurant.rating}</span>
-                  </div>
+                  </div>}
                   <div className="flex items-center gap-1 text-muted-foreground">
                     <Clock className="w-4 h-4" />
-                    <span>{restaurant.deliveryTime}</span>
+                    <span>{restaurant.open ? "يفتح من:" + restaurant.open : ""}</span>
                   </div>
                 </div>
               </div>
