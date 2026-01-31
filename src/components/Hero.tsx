@@ -19,15 +19,15 @@ const Hero = () => {
   //   },
   // ];
 
-  const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => (
-    <div className="bg-card rounded-2xl p-4 shadow-card hover:shadow-elevated transition-shadow duration-300 mx-3 sm:mx-0 w-[280px] sm:w-auto h-full">
-      <div className="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center mx-auto mb-3">
-        {icon}
-      </div>
-      <h3 className="font-bold text-foreground mb-1">{title}</h3>
-      <p className="text-sm text-muted-foreground">{description}</p>
-    </div>
-  );
+  // const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => (
+  //   <div className="bg-card rounded-2xl p-4 shadow-card hover:shadow-elevated transition-shadow duration-300 mx-3 sm:mx-0 w-[280px] sm:w-auto h-full">
+  //     <div className="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center mx-auto mb-3">
+  //       {icon}
+  //     </div>
+  //     <h3 className="font-bold text-foreground mb-1">{title}</h3>
+  //     <p className="text-sm text-muted-foreground">{description}</p>
+  //   </div>
+  // );
 
   return (
     <section className="gradient-hero py-12 sm:py-16">
