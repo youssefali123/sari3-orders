@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --background: 45 20% 97%;
+    --foreground: 30 10% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 30 10% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 10% 15%;
+
+    --primary: 47 97% 50%;
+    --primary-foreground: 30 10% 10%;
+
+    --secondary: 30 30% 92%;
+    --secondary-foreground: 30 10% 20%;
+
+    --muted: 40 20% 94%;
+    --muted-foreground: 30 10% 45%;
+
+    --accent: 25 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 47 97% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(47 97% 50%) 0%, hsl(35 95% 55%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(45 30% 97%) 0%, hsl(40 40% 93%) 100%);
+    --shadow-soft: 0 4px 20px -4px hsl(30 20% 20% / 0.1);
+    --shadow-card: 0 8px 30px -8px hsl(30 20% 20% / 0.12);
+    --shadow-elevated: 0 20px 50px -12px hsl(30 20% 20% / 0.2);
+  }
+
+  .dark {
+    --background: 30 10% 10%;
+    --foreground: 45 20% 95%;
+
+    --card: 30 10% 14%;
+    --card-foreground: 45 20% 95%;
+
+    --popover: 30 10% 14%;
+    --popover-foreground: 45 20% 95%;
+
+    --primary: 47 97% 50%;
+    --primary-foreground: 30 10% 10%;
+
+    --secondary: 30 10% 20%;
+    --secondary-foreground: 45 20% 90%;
+
+    --muted: 30 10% 18%;
+    --muted-foreground: 40 15% 60%;
+
+    --accent: 25 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 10% 22%;
+    --input: 30 10% 22%;
+    --ring: 47 97% 50%;
+    --gradient-hero: linear-gradient(180deg, hsl(30, 10%, 8%) 0%, hsl(40, 18%, 10%) 100%);
+
+    /* --shadow-soft: 0 4px 20px -4px hsl(30 20% 20% / 0.1);
+    --shadow-card: 0 8px 30px -8px hsl(30 20% 20% / 0.12);
+    --shadow-elevated: 0 20px 50px -12px hsl(30 20% 20% / 0.2); */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    direction: rtl;
+  }
+
+  body {
+    @apply bg-background text-foreground font-cairo antialiased;
+  }
+}
+
+@layer utilities {
+  .font-cairo {
+    font-family: 'Cairo', sans-serif;
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+/* body{
+
+  background: url("./assets/background/15.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+} */
+
+.menu-item{
+  transition: 0.75s all ease;
+  scale: 0.3;
+  opacity: 0;
+}
+.menu-item.show{
+  scale: 1;
+  opacity: 1;
+}
+.menu-item.click{
+  animation: anim 0.2s cubic-bezier(.59,.81,.83,.67);
+}
+@keyframes anim {
+  0%{
+    scale: 1;
+  }
+  50%{
+    scale: 1.06;
+    box-shadow: 1px 1px 10px hsl(47 97% 50%);
+  }
+  100%{
+    scale: 1;
+  }
+}
+
+.offer-slider{
+  width: 700px;
+  aspect-ratio: 16/9;
+}
+@media screen and (max-width: 750px) {
+  .mySwiper{
+    width: 100%;
+    aspect-ratio: 1/1;
+    /* height: 50%; */
+  }
+}
+.swiper-pagination-bullet {
+  background-color: gray;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: red;
+}
+.mySwiper {
+  --swiper-pagination-color: hsl(47 97% 50%);
+  --swiper-pagination-bullet-inactive-color: #ccc;
+}
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll 5s linear infinite;
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.carousel{
+  display: flex;
+  border: 2px solid green;
+  overflow-x: auto;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+.track2 {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  background-color: red;
+  justify-content: center;
+  align-items: center;
+  animation: spin 5s linear infinite;
+}
+.track2 > div{
+  flex: 0 0 400px;
+}
+@keyframes spin {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
