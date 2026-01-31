@@ -12,7 +12,7 @@ import { useCart } from "@/hooks/useCart";
 import { toast } from "react-hot-toast";
 import { Restaurant } from "@/types/restaurant";
 import { MenuItem } from "@/types/menu";
-import Loader from "@/components/Loader";
+// import Loader from "@/components/Loader";
 
 
 const Index = () => {
