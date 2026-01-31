@@ -12,9 +12,8 @@ interface NavbarProps {
 const Navbar = ({ cartItemsCount, onCartClick }: NavbarProps) => {
     const [isScrollDown, scrollY, scrollDelta] = useIsScrollDown();
 
-  return (
-    <nav
-  className={`
+    /*
+     className={`
     sticky top-0 z-50
     bg-card/95 backdrop-blur-md
     border-b border-border
@@ -22,6 +21,15 @@ const Navbar = ({ cartItemsCount, onCartClick }: NavbarProps) => {
     ${ (isScrollDown && scrollY && 0 > 200)
   ? "-translate-y-full opacity-0 duration-200"
   : "translate-y-0 opacity-100 duration-400"}
+  `}
+     */
+  return (
+    <nav
+  className={`
+    sticky top-0 z-50
+    bg-card/95 backdrop-blur-md
+    border-b border-border
+    transition-all duration-300 ease-in-out
   `}
 >
     {/* <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-soft"> */}
