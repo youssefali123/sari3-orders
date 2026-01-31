@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Restaurant, RestaurantCategory, categoryIcons } from "@/types/restaurant";
 import RestaurantCard from "./RestaurantCard";
-import { useAppSelector } from "../hooks/useReducx";
+import { useAppSelector } from "../hooks/useRedux";
 
 interface RestaurantsSectionProps {
   onSelectRestaurant: (restaurant: Restaurant) => void;
@@ -13,8 +13,8 @@ interface RestaurantsSectionProps {
 const RestaurantsSection = ({ onSelectRestaurant }: RestaurantsSectionProps) => {
   const [activeCategory, setActiveCategory] = useState<RestaurantCategory | "الكل">("الكل");
   const { menu, loading, error } = useAppSelector((state) => state.menu);
-  const {categories: categoriesAPI } = useAppSelector((state)=>state.menu);
-  const categories: (RestaurantCategory | "الكل")[]= [
+  const { categories: categoriesAPI } = useAppSelector((state) => state.menu);
+  const categories: (RestaurantCategory | "الكل")[] = [
     "الكل",
     ...categoriesAPI,
   ]
@@ -38,25 +38,25 @@ const RestaurantsSection = ({ onSelectRestaurant }: RestaurantsSectionProps) => 
           </h2>
           <p className="text-muted-foreground">اختار من أفضل المطاعم</p>
         </div>
-        
+
         {/* Category Filter */}
-        <div style={{width: "100%" }} className="flex justify-center items-center">
-        <div style={{WebkitOverflowScrolling: "touch",userSelect: "none", overflowX: 'auto', whiteSpace: 'nowrap', scrollbarWidth: 'none', scrollbarColor: 'transparent transparent', maxWidth: '100%'}} className="flex justify-start gap-2 mb-8 items-center">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={activeCategory === category ? "default" : "outline"}
-              size="sm"
-              onClick={() => setActiveCategory(category)}
-              className="rounded-full"
-            >
-              {category !== "الكل" && (
-                <span className="ml-1">{categoryIcons[category]}</span>
-              )}
-              {category}
-            </Button>
-          ))}
-        </div>
+        <div style={{ width: "100%" }} className="flex justify-center items-center">
+          <div style={{ WebkitOverflowScrolling: "touch", userSelect: "none", overflowX: 'auto', whiteSpace: 'nowrap', scrollbarWidth: 'none', scrollbarColor: 'transparent transparent', maxWidth: '100%' }} className="flex justify-start gap-2 mb-8 items-center">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={activeCategory === category ? "default" : "outline"}
+                size="sm"
+                onClick={() => setActiveCategory(category)}
+                className="rounded-full"
+              >
+                {category !== "الكل" && (
+                  <span className="ml-1">{categoryIcons[category]}</span>
+                )}
+                {category}
+              </Button>
+            ))}
+          </div>
         </div>
 
         {/* Restaurants Grid */}
