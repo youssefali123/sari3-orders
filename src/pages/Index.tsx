@@ -10,8 +10,10 @@ import Footer from "@/components/Footer";
 import { useCart } from "@/hooks/useCart";
 // import { toast } from "sonner";
 import { toast } from "react-hot-toast";
-import { Restaurant } from "@/data/restaurants";
+import { Restaurant } from "@/types/restaurant";
 import { MenuItem } from "@/types/menu";
+import Loader from "@/components/Loader";
+
 
 const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -47,11 +49,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar cartItemsCount={totalItems} onCartClick={() => setIsCartOpen(true)} />
-      
+
       <main className="flex-1">
         <Hero />
-        <OffersSection />
         
+        <OffersSection />
+
         {selectedRestaurant ? (
           <RestaurantMenu
             restaurant={selectedRestaurant}
