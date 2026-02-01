@@ -1,5 +1,6 @@
 import { ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
+import { useEffect, useState } from "react";
 
 import logo from "../assets/logo.png"
 import  useIsScrollDown  from "../hooks/useIsScroolDown";
@@ -11,7 +12,18 @@ interface NavbarProps {
 
 const Navbar = ({ cartItemsCount, onCartClick }: NavbarProps) => {
     const [isScrollDown, scrollY, scrollDelta] = useIsScrollDown();
-
+    const [progress, setProgress] = useState(0);
+    useEffect(() => {
+      const handleScroll = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        setProgress(scrollPercent);
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
     /*
      className={`
     sticky top-0 z-50
@@ -25,13 +37,15 @@ const Navbar = ({ cartItemsCount, onCartClick }: NavbarProps) => {
      */
   return (
     <nav
-  className={`
-    sticky top-0 z-50
-    bg-card/95 backdrop-blur-md
-    border-b border-border
-    transition-all duration-300 ease-in-out
-  `}
->
+      
+      className={`
+        sticky top-0 z-50
+        bg-card/95 backdrop-blur-md
+        border-b border-border
+        transition-all duration-300 ease-in-out
+      `}
+    >
+      <div className="progress" style={{width: `${progress}%`}}></div>
     {/* <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-soft"> */}
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
