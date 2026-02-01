@@ -48,8 +48,8 @@ const RestaurantMenu = ({ restaurant, onBack, onAddItem }: RestaurantMenuProps) 
           {/* Restaurant Info */}
           <div className="bg-card border-2 border-border rounded-2xl p-6 mb-8">
             <div className="flex items-center gap-4">
-              <div className="w-20 h-20 rounded-xl bg-primary/10 flex items-center justify-center text-5xl shrink-0">
-                {restaurant.image}
+              <div style={{backgroundImage: `url(${restaurant.image})`, backgroundSize: "cover", backgroundPosition: "center"}} className="w-20 h-20 rounded-xl bg-primary/10 flex items-center justify-center text-5xl shrink-0">
+                {/* {restaurant.image} */}
               </div>
               <div className="flex-1">
                 <h2 className="text-2xl font-bold text-foreground mb-1">
@@ -66,10 +66,10 @@ const RestaurantMenu = ({ restaurant, onBack, onAddItem }: RestaurantMenuProps) 
                     <Star className="w-4 h-4 fill-primary" />
                     <span className="font-semibold">{restaurant.rating}</span>
                   </div>}
-                  <div className="flex items-center gap-1 text-muted-foreground">
+                  {restaurant.open && <div className="flex items-center gap-1 text-muted-foreground">
                     <Clock className="w-4 h-4" />
                     <span>{restaurant.open ? "يفتح من:" + restaurant.open : ""}</span>
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>

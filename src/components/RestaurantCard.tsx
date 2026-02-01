@@ -17,7 +17,7 @@ const RestaurantCard = ({ restaurant, onClick }: RestaurantCardProps) => {
     >
       <CardContent className="p-5">
         <div className="flex items-start gap-4">
-          <div style={{backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: "center"}} className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-4xl shrink-0">
+          <div style={{backgroundImage: `url(${restaurant.image})`, backgroundSize: "cover", backgroundPosition: "center"}} className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-4xl shrink-0">
             {/* {restaurant.image} */}
           </div>
           <div className="flex-1 min-w-0">
@@ -37,10 +37,10 @@ const RestaurantCard = ({ restaurant, onClick }: RestaurantCardProps) => {
                 <Star className="w-4 h-4 fill-primary" />
                 <span className="font-semibold">{restaurant.rating}</span>
               </div>)}
-              <div className="flex items-center gap-1 text-muted-foreground">
+              {restaurant.open && <div className="flex items-center gap-1 text-muted-foreground">
                 <Clock className="w-4 h-4" />
                 <span>{restaurant.open ? "يفتح من:" + restaurant.open : ""}</span>
-              </div>
+              </div>}
             </div>
           </div>
         </div>
