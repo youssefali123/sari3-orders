@@ -224,3 +224,14 @@
     transform: translateX(-100%);
   }
 }
+
+.progress{
+  background-color: hsl(47 97% 50%);
+  bottom:  0;
+  left: 0;
+  z-index: 1000;
+  position: absolute;
+  /* transition: 0.1s ease-in-out; */
+  /* width: ; */
+  height: 3px;
+}
