@@ -36,7 +36,7 @@ const cartSlice = createSlice({
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
-                state.items.push({ ...item, category, restaurantName, quantity: 1 });
+                state.items.push({ ...item, price: item.price as number, category, restaurantName, quantity: 1 });
             }
             localStorage.setItem("cart", JSON.stringify(state.items));
         },
@@ -75,6 +75,19 @@ const cartSlice = createSlice({
         },
         clearCart: (state) => {
             state.items = [];
+            localStorage.setItem("cart", JSON.stringify(state.items));
+        },
+        changePrice: (state, action: PayloadAction<{ name: string; category: string; price: number; restaurantName?: string }>) => {
+            const { name, category, price, restaurantName } = action.payload;
+            const existingItem = state.items.find(
+                (cartItem) =>
+                    cartItem.name === name &&
+                    cartItem.category === category &&
+                    cartItem.restaurantName === restaurantName
+            );
+            if (existingItem) {
+                existingItem.price = price;
+            }
             localStorage.setItem("cart", JSON.stringify(state.items));
         },
     },
