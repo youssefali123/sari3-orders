@@ -1,9 +1,10 @@
-import { ArrowRight, Star, Clock } from "lucide-react";
+import { ArrowRight, Star, Clock , Circle, CircleDot} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { menuCategoryIcons } from "@/data/restaurants";
 import { Restaurant } from "@/types/restaurant";
 import { MenuItem as MenuItemType } from "@/types/menu";
+import { handleResturantOpen } from "./RestaurantCard";
 // import menuImage from "../assets/menu/menu1.jpg";
 // import menuImage2 from "../assets/menu/menu222.png";
 import MenuItem from "./MenuItem";
@@ -20,16 +21,17 @@ interface RestaurantMenuProps {
 }
 
 const RestaurantMenu = ({ restaurant, onBack, onAddItem }: RestaurantMenuProps) => {
-  useEffect(()=>{
+  const [text, isOpen] = handleResturantOpen(restaurant);
+  useEffect(() => {
     window.history.pushState({}, window.location.href);
-    const handleBack = ()=>{
+    const handleBack = () => {
       onBack();
     }
     window.addEventListener("popstate", handleBack);
-    return ()=>{
+    return () => {
       window.removeEventListener("popstate", handleBack);
     }
-  },[onBack])
+  }, [onBack])
   return (
     <section className="py-10 sm:py-14">
       <div className="container mx-auto px-4">
@@ -48,7 +50,7 @@ const RestaurantMenu = ({ restaurant, onBack, onAddItem }: RestaurantMenuProps) 
           {/* Restaurant Info */}
           <div className="bg-card border-2 border-border rounded-2xl p-6 mb-8">
             <div className="flex items-center gap-4">
-              <div style={{backgroundImage: `url(${restaurant.image})`, backgroundSize: "cover", backgroundPosition: "center"}} className="w-20 h-20 rounded-xl bg-primary/10 flex items-center justify-center text-5xl shrink-0">
+              <div style={{ backgroundImage: `url(${restaurant.image})`, backgroundSize: "cover", backgroundPosition: "center" }} className="w-20 h-20 rounded-xl bg-primary/10 flex items-center justify-center text-5xl shrink-0">
                 {/* {restaurant.image} */}
               </div>
               <div className="flex-1">
@@ -62,14 +64,23 @@ const RestaurantMenu = ({ restaurant, onBack, onAddItem }: RestaurantMenuProps) 
                   <Badge variant="secondary">
                     {restaurant.category}
                   </Badge>
-                  {restaurant.rating && <div className="flex items-center gap-1 text-primary">
+                  {/* {restaurant.rating && <div className="flex items-center gap-1 text-primary">
                     <Star className="w-4 h-4 fill-primary" />
                     <span className="font-semibold">{restaurant.rating}</span>
-                  </div>}
-                  {restaurant.open && <div className="flex items-center gap-1 text-muted-foreground">
+                  </div>} */}
+                  {/* {restaurant.open && <div className="flex items-center gap-1 text-muted-foreground">
                     <Clock className="w-4 h-4" />
-                    <span>{restaurant.open ? "يفتح من:" + restaurant.open : ""}</span>
-                  </div>}
+                    <span>{text}</span>
+                  </div>} */}
+                  {isOpen ?
+                <div className="flex items-center gap-1 text-green-500">
+                  <CircleDot className="w-4 h-4" />
+                  <span>مفتوح</span>
+                </div>
+                : <div className="flex items-center gap-1 text-red-500">
+                  <Circle className="w-4 h-4" />
+                  <span>مغلق</span>
+                </div>}
                 </div>
               </div>
             </div>
@@ -94,7 +105,7 @@ const RestaurantMenu = ({ restaurant, onBack, onAddItem }: RestaurantMenuProps) 
                       <MenuItem
                         key={item.name}
                         item={item}
-                        onAdd={() => onAddItem(item, category, restaurant.name)}
+                        onAdd={(modifiedItem) => onAddItem(modifiedItem || item, category, restaurant.name)}
                       />
                     ))}
                   </div>

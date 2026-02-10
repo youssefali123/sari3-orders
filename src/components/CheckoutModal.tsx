@@ -1,12 +1,12 @@
-import {  useState, useEffect } from "react";
+import {  useState, useEffect, useCallback } from "react";
 import { X, User, Phone, MapPin, Send, Loader, NotebookIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { CartItem, OrderForm } from "@/types/menu";
 // import { toast } from "sonner";
 import {  toast } from "react-hot-toast";
-// import Swal from "sweetalert2";
-// import sendMessage from "@/services/send_message";
+import Swal from "sweetalert2";
+import sendMessage from "@/services/send_message";
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -30,21 +30,21 @@ const CheckoutModal = ({
     notes: "",
   });
   const [loading, setLoading] = useState(false);
-  // const send_message = useCallback( async(phone: string, message: string)=>{
-  //   setLoading(true);
-  //   await sendMessage(phone, message)
-  //   Swal.fire({
-  //     icon: 'success',
-  //     title: "طلبك وصل يا جميل هنكلمك حالا😋",
-  //     showConfirmButton: true,
-  //     confirmButtonText: " تمام" ,
-  //     timer: 2500,
+  const send_message = useCallback( async(phone: string, message: string)=>{
+    setLoading(true);
+    await sendMessage(phone, message)
+    Swal.fire({
+      icon: 'success',
+      title: "طلبك وصل يا جميل هنكلمك حالا😋",
+      showConfirmButton: true,
+      confirmButtonText: " تمام" ,
+      timer: 2500,
       
-  //   })
-  //   onOrderComplete();
-  //   onClose();
-  //   setLoading(false);
-  // }, [onOrderComplete, onClose])
+    })
+    onOrderComplete();
+    onClose();
+    setLoading(false);
+  }, [onOrderComplete, onClose])
 
   useEffect(()=>{
     if(window.localStorage.userInfo){
@@ -53,6 +53,7 @@ const CheckoutModal = ({
         name: userInfo.name,
         phone: userInfo.phone,
         address: userInfo.address,
+        notes: "",
       });
     }
   }, [])
@@ -108,13 +109,13 @@ ${form.notes.trim().length > 2  ? `📝 *ملاحظات:* ${form.notes.trim()}` 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-    window.open(whatsappUrl, "_blank");
-    // send_message("201096150381", message);
+    // window.open(whatsappUrl, "_blank");
+    send_message("201096150381", message);
     // toast.success("تم إرسال الطلب بنجاح!");
-    onOrderComplete();
-    onClose();
+    // onOrderComplete();
+    // onClose();
     // setForm({ name: "", phone: "", address: "" });
-    setIsSubmitting(false);
+    // setIsSubmitting(false);
   };
 
   return (
@@ -237,11 +238,14 @@ ${form.notes.trim().length > 2  ? `📝 *ملاحظات:* ${form.notes.trim()}` 
                 type="submit"
                 variant="hero"
                 size="xl"
-                className="w-full"
+                className="w-full flex items-center gap-2 justify-center"
                 disabled={loading}
               >
-                <Send className="w-5 h-5" />
+                <span>
                   ابعت الطلب
+
+                </span>  
+                <Send className="w-5 h-5" />
                 {/* اطلبني بسرعه يلا🍴 */}
 
                 {loading && <Loader className="w-5 h-5 animate-spin" />}
