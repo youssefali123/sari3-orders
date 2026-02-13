@@ -181,9 +181,9 @@ export default function Offer({ data }: { data: OfferItem[] }) {
                     alt={item.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 rounded-md text-sm font-bold">
+                  {/* <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 rounded-md text-sm font-bold">
                     {item.discount}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-2xl font-bold text-primary">{item.price} ج.م</span>
