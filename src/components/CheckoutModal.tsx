@@ -1,10 +1,10 @@
-import {  useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { X, User, Phone, MapPin, Send, Loader, NotebookIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { CartItem, OrderForm } from "@/types/menu";
 // import { toast } from "sonner";
-import {  toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
 import sendMessage from "@/services/send_message";
 
@@ -30,24 +30,24 @@ const CheckoutModal = ({
     notes: "",
   });
   const [loading, setLoading] = useState(false);
-  const send_message = useCallback( async(phone: string, message: string)=>{
+  const send_message = useCallback(async (phone: string, message: string) => {
     setLoading(true);
     await sendMessage(phone, message)
     Swal.fire({
       icon: 'success',
       title: "طلبك وصل يا جميل هنكلمك حالا😋",
       showConfirmButton: true,
-      confirmButtonText: " تمام" ,
+      confirmButtonText: " تمام",
       timer: 2500,
-      
+
     })
     onOrderComplete();
     onClose();
     setLoading(false);
   }, [onOrderComplete, onClose])
 
-  useEffect(()=>{
-    if(window.localStorage.userInfo){
+  useEffect(() => {
+    if (window.localStorage.userInfo) {
       const userInfo = JSON.parse(window.localStorage.userInfo);
       setForm({
         name: userInfo.name,
@@ -83,26 +83,71 @@ const CheckoutModal = ({
     window.localStorage.userInfo = JSON.stringify(form);
     // Build WhatsApp message
     //•
-    const orderDetails = cart
-      .map(
-        (item) =>
-          `⏪ ${item.name}  ${item.description ? "[" + item.description + "]" : ""} (${item.restaurantName ? `${item.restaurantName} ` : ""}) × ${item.quantity} = ${
-            item.price * item.quantity
-          } جنيه \n`
-      )
-      .join("\n");
+    // gpt msg
+    const LTR = "\u200E";
+const RTL = "\u200F";
 
-    const message = `🍽️ *طلب جديد من سريع*
+const escapeMarkdown = (text = "") =>
+  text.replace(/([_*[\]()~`>#+-=|{}.!])/g, "\\$1");
 
-👤 *الاسم:* ${form.name.trim()}
-📱 *التليفون:* ${form.phone.trim()}
-📍 *العنوان:* ${form.address.trim()}
+const orderDetails = cart
+  .map((item, index) => {
+    const name = `${RTL}${escapeMarkdown(item.name)}${RTL}`;
+    const restaurant = item.restaurantName
+      ? `\n   🏪 (${LTR}${escapeMarkdown(item.restaurantName)}${LTR})`
+      : "";
 
-📋 *تفاصيل الطلب:*
+    const quantity = `${LTR}${item.quantity}${LTR}`;
+    const itemTotal = `${LTR}${item.price * item.quantity}${LTR}`;
+
+    return `*${index + 1})* ${name}${restaurant}
+   🔢 الكمية: ${quantity}
+   💵 الإجمالي: ${itemTotal} جنيه`;
+  })
+  .join("\n\n");
+
+const message = `🧾 *طلب جديد - سريع*
+
+━━━━━━━━━━━━━━
+👤 *العميل:* ${RTL}${escapeMarkdown(form.name.trim())}${RTL}
+📱 *التليفون:* ${LTR}${form.phone.trim()}${LTR}
+📍 *العنوان:* ${RTL}${escapeMarkdown(form.address.trim())}${RTL}
+━━━━━━━━━━━━━━
+
+📦 *تفاصيل الطلب:*
+
 ${orderDetails}
-${form.notes.trim().length > 2  ? `📝 *ملاحظات:* ${form.notes.trim()}` : ""}
 
-💰 *الإجمالي:* ${totalPrice} جنيه`;
+━━━━━━━━━━━━━━
+${
+  form.notes.trim().length > 2
+    ? `📝 *ملاحظات:*\n${RTL}${escapeMarkdown(form.notes.trim())}${RTL}\n━━━━━━━━━━━━━━\n`
+    : ""
+}
+💰 *الإجمالي الكلي:* ${LTR}${totalPrice}${LTR} جنيه
+━━━━━━━━━━━━━━`;
+
+    //end gpt msg
+
+//     const orderDetails = cart
+//       .map(
+//         (item) =>
+//           `⏪ ${item.name}  ${item.restaurantName ? `(${item.restaurantName})` : ""} × ${item.quantity} = ${item.price * item.quantity
+//           } جنيه \n`
+//       )
+//       .join("\n");
+
+//     const message = `🍽️ *طلب جديد من سريع*
+
+// 👤 *الاسم:* ${form.name.trim()}
+// 📱 *التليفون:* ${form.phone.trim()}
+// 📍 *العنوان:* ${form.address.trim()}
+
+// 📋 *تفاصيل الطلب:*
+// ${orderDetails}
+// ${form.notes.trim().length > 2 ? `📝 *ملاحظات:* ${form.notes.trim()}` : ""}
+
+// 💰 *الإجمالي:* ${totalPrice} جنيه`;
 
     // Open WhatsApp with the message
     const whatsappNumber = "201096150381"; // phone number to sent
@@ -244,7 +289,7 @@ ${form.notes.trim().length > 2  ? `📝 *ملاحظات:* ${form.notes.trim()}` 
                 <span>
                   ابعت الطلب
 
-                </span>  
+                </span>
                 <Send className="w-5 h-5" />
                 {/* اطلبني بسرعه يلا🍴 */}
 

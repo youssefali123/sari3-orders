@@ -51,7 +51,7 @@ const MenuItem = ({ item, onAdd }: MenuItemProps) => {
     if (typeof item.price === "object" && selectedVariant) {
       itemToAdd = {
         ...item,
-        name: `${item.name} ${selectedVariant} `,
+        name: `${item.name} ${selectedVariant}`,
         price: item.price[selectedVariant]
       };
     }
@@ -59,7 +59,7 @@ const MenuItem = ({ item, onAdd }: MenuItemProps) => {
     onAdd(itemToAdd);
     const audio = new Audio(sound);
     audio.play();
-    //navigator.vibrate(100);
+    // navigator.vibrate(100);
     itemRef.current.classList.add("click")
     setTimeout(() => {
       itemRef.current.classList.remove("click")
