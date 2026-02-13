@@ -7,6 +7,14 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { useEffect, useState } from "react";
 import { useCart } from "../hooks/useCart";
 import { toast } from "react-hot-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface TimeLeft {
   days: number;
@@ -81,8 +89,9 @@ const OfferCard = ({ item }: { item: OfferItem }) => {
 
   return (
     //mx-auto
-    <div  className="flex flex-col items-center justify-center bg-black/50 text-white p-2 md:p-4 rounded-lg md:rounded-xl backdrop-blur-sm shadow-lg max-w-[250px] md:max-w-xs swiper-no-swiping">
-      <button 
+    // backdrop-blur-sm
+    <div className="flex flex-col items-center justify-center bg-black/5 text-white p-2 md:p-4 rounded-lg md:rounded-xl  shadow-lg max-w-[250px] md:max-w-xs swiper-no-swiping">
+      <button
         onClick={handleAddToCart}
         className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors text-xs md:text-sm"
       >
@@ -105,6 +114,16 @@ const OfferCard = ({ item }: { item: OfferItem }) => {
 };
 
 export default function Offer({ data }: { data: OfferItem[] }) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (item: OfferItem) => {
+    addToCart({
+      name: item.title,
+      price: item.price,
+    }, "عروض خاصة");
+    toast.success("تمت الإضافة للسلة");
+  };
+
   return (
     <Swiper
 
@@ -117,7 +136,7 @@ export default function Offer({ data }: { data: OfferItem[] }) {
       centeredSlides={true}
       loop={true}
       autoplay={{
-        delay: 3500, 
+        delay: 3500,
         disableOnInteraction: false,
       }}
       pagination={{
@@ -131,18 +150,54 @@ export default function Offer({ data }: { data: OfferItem[] }) {
     >
       {data.map((item) => (
         <SwiperSlide key={item.id} className="w-full h-full">
-          <div
-            className="w-full h-full flex items-center justify-center bg-cover bg-center rounded-lg overflow-hidden relative"
-            style={{ backgroundImage: `url(${item.image})` }}
-          >
-            {/* Overlay to ensure text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <Dialog>
+            <DialogTrigger asChild>
+              <div
+                className="w-full h-full flex items-center justify-center bg-cover bg-center rounded-lg overflow-hidden relative cursor-pointer"
+                style={{ backgroundImage: `url(${item.image})` }}
+              >
+                {/* Overlay to ensure text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-            {/* Content */}
-            <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end" }} className="p-1  relative z-10 ">
-              <OfferCard item={item} />
-            </div>
-          </div>
+                {/* Content */}
+                <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end" }} className="p-1  relative z-10 ">
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <OfferCard item={item} />
+                  </div>
+                </div>
+              </div>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle>{item.title}</DialogTitle>
+                <DialogDescription>
+                  {item.description}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="flex flex-col gap-4">
+                <div className="relative w-full aspect-square rounded-md overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 rounded-md text-sm font-bold">
+                    {item.discount}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-primary">{item.price} ج.م</span>
+                  <button
+                    onClick={() => handleAddToCart(item)}
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-2 px-6 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                  >
+                    <ShoppingCart size={20} />
+                    <span>أضف للسلة</span>
+                  </button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </SwiperSlide>
       ))}
     </Swiper>
