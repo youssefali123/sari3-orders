@@ -23,12 +23,22 @@ const sendMessage = async (phone: string, message: string) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                chat_id: adham_id,
+                text: message,
+                parse_mode: "Markdown",
+            }),
+        });
+        fetch(url,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
                 chat_id: CHAT_ID,
                 text: message,
                 parse_mode: "Markdown",
-                
             }),
-        });
+        })
         const data = await response.json();
         console.log("message sent")
         return data;
@@ -38,4 +48,3 @@ const sendMessage = async (phone: string, message: string) => {
     }
 };
 export default sendMessage;
-
