@@ -82,7 +82,7 @@ const MenuItem = ({ item, onAdd }: MenuItemProps) => {
   return (
     <div ref={itemRef} className="menu-item bg-card rounded-xl p-4 shadow-soft hover:shadow-card transition-all duration-300 group">
       <div className="flex items-center justify-between gap-3">
-        {item.image || 1 && (
+        {item.image  && (
           <Dialog>
             <DialogTrigger asChild>
               <div 
@@ -92,7 +92,7 @@ const MenuItem = ({ item, onAdd }: MenuItemProps) => {
                 }}
               >
                 <img 
-                  src={item.image || logo} 
+                  src={item.image} 
                   alt={item.name} 
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   loading="lazy"
