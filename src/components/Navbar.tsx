@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import logo from "../assets/logo.png"
 import  useIsScrollDown  from "../hooks/useIsScroolDown";
 import  Switch2  from "./ui/switch2";
+import NavbarSearch from "./NavbarSearch";
+
 interface NavbarProps {
   cartItemsCount: number;
   onCartClick: () => void;
@@ -48,23 +50,23 @@ const Navbar = ({ cartItemsCount, onCartClick }: NavbarProps) => {
       <div className="progress" style={{width: `${progress}%`}}></div>
     {/* <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-soft"> */}
       <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-1 sm:gap-4">
           {/* Logo */}
-          {/* <div className="flex items-center gap-2"> */}
-            <div className="flex items-center gap-2 animate-logo-slide">
-            <div style={{overflow: "hidden"}} className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center shadow-soft">
-              {/* <Zap className="w-6 h-6 text-primary-foreground" /> */}
-              <img className="w-10 h-10" src={logo} alt="logo" />
+          <div className="flex items-center gap-2 animate-logo-slide shrink-0">
+            <div style={{overflow: "hidden"}} className="w-8 h-8 sm:w-10 sm:h-10 gradient-primary rounded-xl flex items-center justify-center shadow-soft">
+              <img className="w-8 h-8 sm:w-10 sm:h-10" src={logo} alt="logo" />
             </div>
-            <span className="text-2xl font-bold text-gradient">سريع</span>
+            <span className="text-xl sm:text-2xl font-bold text-gradient hidden sm:inline">سريع</span>
           </div>
 
-          {/* Cart Button */}
-          {/* <Switch /> */}
-          <Switch2 />
-          <Button
-            variant="cart"
-            size="lg"
+          <NavbarSearch />
+
+          {/* Right section: Switch & Cart Button */}
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            <Switch2 />
+            <Button
+              variant="cart"
+              size="default"
             onClick={onCartClick}
             className="relative"
           >
@@ -77,6 +79,7 @@ const Navbar = ({ cartItemsCount, onCartClick }: NavbarProps) => {
               </span>
             )}
           </Button>
+        </div>
         </div>
       </div>
     </nav>

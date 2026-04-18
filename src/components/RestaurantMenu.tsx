@@ -1,4 +1,4 @@
-import { ArrowRight, Star, Clock , Circle, CircleDot} from "lucide-react";
+import { ArrowRight, Star, Clock, Circle, CircleDot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { menuCategoryIcons } from "@/data/restaurants";
@@ -73,14 +73,14 @@ const RestaurantMenu = ({ restaurant, onBack, onAddItem }: RestaurantMenuProps) 
                     <span>{text}</span>
                   </div>} */}
                   {isOpen ?
-                <div className="flex items-center gap-1 text-green-500">
-                  <CircleDot className="w-4 h-4" />
-                  <span>مفتوح</span>
-                </div>
-                : <div className="flex items-center gap-1 text-red-500">
-                  <Circle className="w-4 h-4" />
-                  <span>مغلق</span>
-                </div>}
+                    <div className="flex items-center gap-1 text-green-500">
+                      <CircleDot className="w-4 h-4" />
+                      <span>مفتوح</span>
+                    </div>
+                    : <div className="flex items-center gap-1 text-red-500">
+                      <Circle className="w-4 h-4" />
+                      <span>مغلق</span>
+                    </div>}
                 </div>
               </div>
             </div>

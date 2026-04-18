@@ -1,8 +1,17 @@
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { MenuItem as MenuItemType } from "@/types/menu";
 import { useEffect, useRef, useState } from "react";
 import sound from "../assets/sound.wav"
+import logo from "../assets/logo.png"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 // import { set } from "date-fns";
 
 interface MenuItemProps {
@@ -69,12 +78,41 @@ const MenuItem = ({ item, onAdd }: MenuItemProps) => {
   useEffect(() => {
     observer.observe(itemRef.current);
   }, [])
-
+//           <h4 className="font-semibold text-foreground truncate group-hover:text-primary transition-colors">
   return (
     <div ref={itemRef} className="menu-item bg-card rounded-xl p-4 shadow-soft hover:shadow-card transition-all duration-300 group">
       <div className="flex items-center justify-between gap-3">
+        {item.image || 1 && (
+          <Dialog>
+            <DialogTrigger asChild>
+              <div 
+                className="shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-muted/20 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <img 
+                  src={item.image || logo} 
+                  alt={item.name} 
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
+                />
+              </div>
+            </DialogTrigger>
+            <DialogContent className="max-w-3xl w-11/12 p-0 border-none bg-transparent shadow-none [&>button]:text-white/70 hover:[&>button]:text-white [&>button]:bg-black/50 hover:[&>button]:bg-black/80 [&>button]:p-2 [&>button]:rounded-full">
+              <DialogTitle className="sr-only">{item.name}</DialogTitle>
+              <div className="flex justify-center items-center">
+                <img 
+                  src={item.image || logo} 
+                  alt={item.name} 
+                  className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl"
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
         <div className="flex-1 min-w-0">
-          <h4 className="font-semibold text-foreground truncate group-hover:text-primary transition-colors">
+          <h4 className="font-semibold text-foreground break-words group-hover:text-primary transition-colors">
             {item.name}
           </h4>
           {item.description && <p className="text-sm text-muted-foreground line-clamp-2 break-words group-hover:text-primary transition-colors">

@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {  Clock, Circle, CircleDot } from "lucide-react";
+import { Clock, Circle, CircleDot } from "lucide-react";
 import { Restaurant, categoryIcons } from "@/types/restaurant";
 // import image from "../assets/menu/image.png";
 
