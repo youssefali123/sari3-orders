@@ -90,9 +90,9 @@ const RestaurantsSection = ({ onSelectRestaurant }: RestaurantsSectionProps) => 
 
   const filteredRestaurants = menu.filter((r) => {
     if (mainType === "market") {
-      return r.category === "market";
+      return r.category === "سوبر ماركت";
     } else {
-      if (r.category === "market") return false;
+      if (r.category === "سوبر ماركت") return false;
       if (activeCategory === "الكل") return true;
       return r.category === activeCategory;
     }
