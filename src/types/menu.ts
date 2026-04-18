@@ -23,8 +23,9 @@
 
 export interface MenuItem {
   name: string;
-  price: number;
+  price: number | { [key: string]: number };
   description?: string;
+  image?: string;
 }
 
 /** القسم الواحد */
@@ -38,7 +39,8 @@ export interface MenuData {
   [category: string]: MenuCategory;
 }
 
-export interface CartItem extends MenuItem {
+export interface CartItem extends Omit<MenuItem, 'price'> {
+  price: number;
   quantity: number;
   category: string;
   restaurantName?: string;

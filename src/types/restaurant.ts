@@ -1,6 +1,6 @@
 import { MenuData } from "./menu";
 
-export type RestaurantCategory = "مشويات" | "أسماك" | "سندوتشات" | "مأكولات شرقية" | "حلويات";
+export type RestaurantCategory = "مشويات" | "أسماك" | "سندوتشات" | "مأكولات شرقية" | "حلويات" | "market";
 
 export interface Restaurant {
     id: string;
@@ -20,4 +20,5 @@ export const categoryIcons: Record<RestaurantCategory, string> = {
     "سندوتشات": "🥪",
     "مأكولات شرقية": "🍲",
     "حلويات": "🍰",
+    "market": "🛒",
 };
