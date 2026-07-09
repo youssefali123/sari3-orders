@@ -53,6 +53,7 @@ const Index = () => {
       <main className="flex-1">
         <Hero />
         
+
         <OffersSection />
 
         {selectedRestaurant ? (
