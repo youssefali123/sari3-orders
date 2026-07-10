@@ -70,7 +70,7 @@ const Index = () => {
       </main>
 
       <Footer />
-      <SocialBarAd />
+      {/* <SocialBarAd /> */}
 
       <CartDrawer
         isOpen={isCartOpen}
