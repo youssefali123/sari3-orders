@@ -12,6 +12,8 @@ import { useCart } from "@/hooks/useCart";
 import { toast } from "react-hot-toast";
 import { Restaurant } from "@/types/restaurant";
 import { MenuItem } from "@/types/menu";
+import Ad from "@/components/ui/Ad";
+import SocialBarAd from "@/components/ui/AdSocial";
 // import Loader from "@/components/Loader";
 
 
@@ -52,7 +54,7 @@ const Index = () => {
 
       <main className="flex-1">
         <Hero />
-        
+        <Ad/>
 
         <OffersSection />
 
@@ -68,6 +70,7 @@ const Index = () => {
       </main>
 
       <Footer />
+      <SocialBarAd />
 
       <CartDrawer
         isOpen={isCartOpen}
