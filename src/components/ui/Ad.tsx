@@ -29,13 +29,19 @@ const Ad = () => {
   }, []);
 
   return (
+    <div style={{
+      width:"100%",
+      overflow: "hidden"
+    }}>
     <div
+      
       ref={adRef}
       style={{
         width: "468px",
         height: "60px",
       }}
     />
+    </div>
   );
 };
 
