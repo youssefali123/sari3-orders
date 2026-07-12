@@ -21,10 +21,10 @@ const Footer = () => {
           </p>
         </div>
       </div>
-          <p style={{backgroundColor:"black"}} className="py-1 text-sm text-muted-foreground flex items-center justify-center gap-1">
+          <p style={{backgroundColor:"black"}} className="py-1 text-sm text-muted-foreground flex items-center justify-center gap-1 pb-4">
             صنع بـواسطة 
             {/* <Heart className="w-4 h-4 text-accent fill-accent" /> */}
-            <a target="_blank" href="https://wa.me/201096150381" style={{fontWeight: "bold", color: "#fac402", fontSize: "1.16rem"}}>يوسف علي</a>
+            <a target="_blank" href="https://wa.me/201096150381" style={{fontWeight: "bold", color: "#fac402", fontSize: "1.16rem", textDecoration: "underline"}}>يوسف علي</a>
             في مصر
           </p>
     </footer>

@@ -1,6 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import logo from "../assets/logo.png"
 import  useIsScrollDown  from "../hooks/useIsScroolDown";
@@ -52,12 +53,12 @@ const Navbar = ({ cartItemsCount, onCartClick }: NavbarProps) => {
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between gap-1 sm:gap-4">
           {/* Logo */}
-          <div className="flex items-center gap-2 animate-logo-slide shrink-0">
+          <Link to="/" className="flex items-center gap-2 animate-logo-slide shrink-0">
             <div style={{overflow: "hidden"}} className="w-8 h-8 sm:w-10 sm:h-10 gradient-primary rounded-xl flex items-center justify-center shadow-soft">
               <img className="w-8 h-8 sm:w-10 sm:h-10" src={logo} alt="logo" />
             </div>
             <span className="text-xl sm:text-2xl font-bold text-gradient hidden sm:inline">سريع</span>
-          </div>
+          </Link>
 
           <NavbarSearch />
 
