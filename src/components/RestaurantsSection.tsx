@@ -6,6 +6,7 @@ import { Restaurant, RestaurantCategory, categoryIcons } from "@/types/restauran
 import RestaurantCard from "./RestaurantCard";
 import { useAppSelector } from "../hooks/useRedux";
 import Loader from "./Loader";
+import Ad from "./ui/Ad";
 
 interface RestaurantsSectionProps {
   onSelectRestaurant: (restaurant: Restaurant) => void;
@@ -90,7 +91,7 @@ const RestaurantsSection = ({ onSelectRestaurant }: RestaurantsSectionProps) => 
 
   const filteredRestaurants = menu.filter((r) => {
     if (mainType === "market") {
-      return r.category === "سوبر ماركت";
+        return r.category === "سوبر ماركت";
     } else {
       if (r.category === "سوبر ماركت") return false;
       if (activeCategory === "الكل") return true;
@@ -108,7 +109,7 @@ const RestaurantsSection = ({ onSelectRestaurant }: RestaurantsSectionProps) => 
             <span className="text-xl">&rarr;</span> رجوع
           </Button>
           
-          <div className="text-center flex-1">
+          <div className="text-center flex-1 mb-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2 flex items-center justify-center gap-3">
               {mainType === "restaurant" ? (
                 <><span>🍽️</span> المطاعم</>
@@ -120,6 +121,7 @@ const RestaurantsSection = ({ onSelectRestaurant }: RestaurantsSectionProps) => 
               {mainType === "restaurant" ? "اختار من أفضل المطاعم" : "اختار من أفضل المتاجر لدينا"}
             </p>
           </div>
+          <Ad/>
           
           <div className="w-24 hidden sm:block"></div> {/* Spacer for balancing centered text */}
         </div>
