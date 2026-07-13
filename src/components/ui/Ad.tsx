@@ -1,7 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Ad = () => {
   const adRef = useRef(null);
+  const [count, setCount] = useState(0);
+  useEffect(()=>{
+    const timer = setTimeout(() => {
+      setCount(count + 1);
+      console.log("ad count", count);
+    }, 1000*8);
+    return () => clearTimeout(timer);
+  },[count])
 
   useEffect(() => {
     // Set Adsterra options
@@ -26,7 +34,7 @@ const Ad = () => {
         adRef.current.innerHTML = "";
       }
     };
-  }, []);
+  }, [count]);
 
   return (
     <div style={{
@@ -47,7 +55,14 @@ const Ad = () => {
 
 export const Ad2 = () => {
   const adRef = useRef(null);
-
+  const [count, setCount] = useState(0);
+  useEffect(()=>{
+    const timer = setTimeout(() => {
+      setCount(count + 1);
+      console.log("ad count", count);
+    }, 1000*8);
+    return () => clearTimeout(timer);
+  },[count])
   useEffect(() => {
     // Set Adsterra options
     (window as any).atOptions = {
@@ -71,7 +86,7 @@ export const Ad2 = () => {
         adRef.current.innerHTML = "";
       }
     };
-  }, []);
+  }, [count]);
 
   return (
     <div style={{
