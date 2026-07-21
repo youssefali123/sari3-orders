@@ -121,7 +121,7 @@ const RestaurantsSection = ({ onSelectRestaurant }: RestaurantsSectionProps) => 
               {mainType === "restaurant" ? "اختار من أفضل المطاعم" : "اختار من أفضل المتاجر لدينا"}
             </p>
           </div>
-          <Ad/>
+          {/* <Ad/> */}
           
           <div className="w-24 hidden sm:block"></div> {/* Spacer for balancing centered text */}
         </div>
